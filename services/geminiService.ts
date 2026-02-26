@@ -28,7 +28,7 @@ Gunakan blok JSON_CHART jika pengguna meminta perbandingan atau statistik visual
 
 export class GeminiService {
   async analyzeData(prompt: string, contextData: string, history: Message[]): Promise<string> {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
     
     const fullPrompt = `Konteks Data Rancangan Tempatan:\n---\n${contextData}\n---\n\nPermintaan Pengguna: ${prompt}\n\nIngatan: Jangan gunakan simbol asterisk (*) dalam jawapan anda.`;
     
