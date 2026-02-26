@@ -2,9 +2,12 @@ import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+import process from 'node:process';
 
 export default defineConfig(({ mode }) => {
-    const env = loadEnv(mode, '.', '');
+    // Memuatkan semua env vars tanpa mengira prefix (menggunakan '')
+    const env = loadEnv(mode, process.cwd(), '');
+    
     return {
       server: {
         port: 3000,
@@ -15,8 +18,8 @@ export default defineConfig(({ mode }) => {
         tailwindcss(),
       ],
       define: {
-        'process.env.GEMINI_API_KEY': JSON.stringify(process.env.GEMINI_API_KEY || env.GEMINI_API_KEY),
-        'process.env.NODE_ENV': JSON.stringify(mode),
+        // Memetakan keseluruhan objek env ke process.env untuk akses di browser
+        'process.env': env
       },
       resolve: {
         alias: {
